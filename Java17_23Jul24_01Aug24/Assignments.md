@@ -10,6 +10,19 @@
         (iv) no specases are allowed. 
         (v) if the length of the name is not sufficient, the gap shall be filled by the most frequest letter of the full-name.
 
+        Hint:
+
+            1. declare a double dim array of size fullName.length,2
+            2. in the first dim we will have char and in the second we will have its frequency
+            3. iterate through the full name and count the freqeucny of each char in the full name
+
+                john john
+
+                'j' 2
+                'o' 2
+                'h' 2
+                'n' 2
+
 #2
 -----------------------------------------
 
@@ -32,6 +45,23 @@
     if the prohibition period is 15 months from data of joining,
     and VR eligibility is a minimum of 8 years and 8 months from date of joining and
     and 40 years is the maximum service period from the date of joining.
+
+#5
+-----------------------------------------
+
+    Develop a Java Console Appliction that has 
+    an Employee model having
+        empId an integer
+        fullName a string
+        salary a double
+        dateOfJoining a LocalDate
+        skills is a collection of strings where each string is a single skill like (Java, Angular, React,..etc);
+
+    create a hypothetical collection of 10 employee records.
+
+    sort the collection on dateOfJoing.
+    sort the collection on skills.
+
 
 
 

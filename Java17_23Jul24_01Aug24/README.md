@@ -191,6 +191,49 @@ Java 17
             toHours,toYears,toMonths,toMillSecs ...etc.,
 
     java.util
+
+      Random
+      Scanner
+      
+      Collections (class)
+
+      Collection (i)                  add,remove,contains,size,isEmpty,stream
+        |
+        |- List  (i)                  is a linear datastructure representation
+        |                             the elements position is numbered or indexing is possible
+        |                             duplicate ele are allowed
+        |
+        |   |- ArrayList              is a growable array
+        |   |- Vector                 is a synchronized growable array
+        |   |- LinkedList             is a doublly linked list implementation
+        |
+        |- Set                        is a non-linear datastructure representation
+        |                             no duplicates allowed here
+        |   
+        |   |- HashSet                unknown oreder of retrival
+        |   |- LinkedHashSet          insertion order of retrival
+        |   |- TreeSet                sorted order of retrival
+
+      Map (i)                         a collection of key-value pairs, key must be unique
+        |                             put(k,v),set(k,v),containsKey,containsValue,keys,size,isEmpty,remove(k)
+        |
+        |- HashMap                    unknown oreder of retrival
+        |- LinkedHashMap              insertion order of retrival
+        |- TreeMap                    sorted order of retrival
+
+      java.lang.Comparable            int compareTo(Object)
+
+                                      Comparable interface is expected to be implemented by the model class itself,
+                                      that means the object of the model will be an object of the Comparable interface
+
+                                      obj1.compareTo(obj2)
+
+                                          obj1>obj2, the method has to return a positive val
+                                          obj1-obj2, the method has to return a zero
+                                          obj1<obj2, the method has to return a negative val
+
+      Comparator                      int compare(obj1,obj2)
+
     java.util.regex
     java.util.function
     java.util.stream
