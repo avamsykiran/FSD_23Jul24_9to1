@@ -1,0 +1,16 @@
+package com.cts.jsf.ui;
+
+import java.time.Duration;
+import java.time.LocalTime;
+
+public class App02DateTimeApiDemo {
+
+	public static void main(String[] args) {
+
+		LocalTime starttime = LocalTime.now();
+		LocalTime endtime = LocalTime.now();
+		Duration execDur = Duration.between(starttime, endtime);
+		System.out.printf("\nIt took %d milli secs to execute this app.", execDur.toMillis());
+	}
+
+}
