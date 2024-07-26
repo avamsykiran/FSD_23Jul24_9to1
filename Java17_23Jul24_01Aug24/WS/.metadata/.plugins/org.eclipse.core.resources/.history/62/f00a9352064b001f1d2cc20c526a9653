@@ -1,0 +1,15 @@
+package com.cts.jsf.ui;
+
+import java.util.function.Supplier;
+
+public class App06FunctionalInterfacesAndLambdaExpressionsDemo {
+
+	public static void main(String[] args) {
+
+		Supplier<String> greeting = () -> "Hello! How are you!?";
+		
+		System.out.println(greeting.get());
+		
+	}
+
+}

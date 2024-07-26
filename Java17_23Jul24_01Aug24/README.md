@@ -235,8 +235,91 @@ Java 17
       Comparator                      int compare(obj1,obj2)
 
     java.util.regex
+
+      java.lang.String :: matches
+
+      Pattern
+      Matcher
+
     java.util.function
+
+      Funtional Interfaces are interfaces having only one abstract method.
+
+      Lambfds Expression is sued to implement and instantiate a funtional interface.
+      A Lambda Expression is a mapping from the params to a return value or an implementation using '->' the arrow operator.
+
+      Method Referencing will allow to pass teh reference of a method into a functional interface reference.
+
+        FunctionalInterfaceName obj = AnyClass::methodName;
+
+      Supplier      the abstract method of the interface is returning a value but doesn't have any args.
+      Consumer      the abstract method of the interface is not returning any value but has args.
+      Predicate     the abstract method of the interface is returning a boolean
+    
     java.util.stream
+
+      a stream is a flow of data.
+
+      [ data-source ] <------stream-----> [ terminal ]
+
+      data-source can be an array/ a list/ a set or a simple comman seperated values
+
+      terminal can be a list/ a set/ or nothing.
+
+      [ data-source ] 
+          <------stream----->  operation 1
+                                 <------stream-----> operation 2
+                                                        <------stream-----> operation 3
+                                                                                <------stream----->
+                                                                                                [ terminal ]
+
+      
+      each operation is represented by a function
+
+      Stream        represents a stream of data
+
+                    Stream s1 = Stream.of(obj1,obj2,obj3....);
+                    Stream s2 = Arrays.stream(array);
+                    Stream s3 = list.stream();
+                    Stream s4 = set.stream();
+
+                    forEach(consumer)
+                        executes the given consumer on each and every element of the stream.
+                        forEach returns nothing, and hence is a terminal operation.
+
+                    collect(collector)
+                        is used to collect all the elements of a stream into a list or a set or a map.
+                        collect returns a Collection, and hence is a terminal operation.
+
+                    reduce(binaryOperator)
+                        is going to reduce the entire stream into one element, and hence is a terminal operation.
+
+                        assuming a stream has five elements, the reduce works like this..,                          
+                          binaryOperator(binaryOperator(binaryOperator(binaryOperator(ele1,ele2),ele3),ele4),ele5) gives one single value
+
+                        eg:
+                          Stream s1 = Stream.of(1,2,3,4,5);
+                          BinaryOperator sum = (x,y) -> x+y;
+                          int s = s1.reduce(sum); //s will be 15
+
+                    filter(predicate)
+                        filter returns a new stream having only those elements of the current stream that satisfy the predicate.
+                        as the filter returns a new stream, other operations can be chained and hence is called a intermidiate operation.
+
+                        eg:
+                          Stream s1 = Stream.of(1,2,3,4,5);
+                          int result = s1.filter( x -> x%2==0 ).reduce( (a,b) -> a+b ); // result will be 6
+
+                    map(transformer)
+                        transformer is any function that accepts a value and converts that into another value.
+                        eg. Math::sqrt  is a transformer as it convert a number inot its square root.
+
+                        map return a new stream of all teh result of the transformer once it is invoked on each ele of teh current stream.
+                        as the map returns a new stream, other operations can be chained and hence is called a intermidiate operation.
+
+                        eg:
+                          Stream s1 = Stream.of(1,2,3,4,5);
+                          s1.map( x -> x*x ).forEach(System.out::println); // 1,4,9,16,25 is printed.
 
     java.io
     java.nio

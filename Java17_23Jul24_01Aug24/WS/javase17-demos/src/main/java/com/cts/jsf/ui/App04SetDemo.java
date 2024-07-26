@@ -2,8 +2,7 @@ package com.cts.jsf.ui;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
+import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
 
