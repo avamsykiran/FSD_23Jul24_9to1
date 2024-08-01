@@ -322,5 +322,215 @@ Java 17
                           s1.map( x -> x*x ).forEach(System.out::println); // 1,4,9,16,25 is printed.
 
     java.io
+
+      Binsry Streams
+
+        InputStream                       OutputStream
+          |                                   |
+          |- FileInputStream                  |- PrintStream
+          |- ByteInputStream                  |- FileOutputStream
+          |- DataInputStream                  |- DataOutputStream
+
+      
+      Character / Text Streams
+
+        Reader                            Writer
+          |                                   |
+          |- FileReader                       |- FileWriter
+          |- InputStreamReader                |- PrintWriter
+          |- BufferedReader
+
     java.nio
+
+      Path
+      Paths
+
+      Files
+      Directories
+
+      Channels
+        are similar to io-streams, as they carry data. The major enhancement is that a single channel
+        can be used for both reading and writing unlike the streams.
+
+      Buffers
+        a channel is always connected to a buffer, where a buffer is a memory block that can allow a channel
+        to pull data or allow a channel to push data. 
+
+        Each buffer has a capacity, limit and position.
+
+        Capacity is the maximum count of bytes/ints/chars ..etc that a buffer can hold.
+            
+            IntBuffer buf = IntBuffer.allocate(1024);
+
+        Position is the cell at which the write or read happended on a buffer. Initially
+        the position is 0. The position is advacned after each read or write.
+
+        Limit is the last position that is read or written.
+
+        A buffer has two modes read and write, using .flip() method, we can switch between
+        read and write modes.
+
+        buf.put() is used to put one int/byte/char ..etc into a buffer and buf.get() is used to read mannually.
+
+        channel.read(buf) and channel.write(buf) are used to read and write from and into a buffer.
+
+        buf.clear() is going clear the buffer and make it ready for a fresh writing.
+
+      Scatter - Gather
+      Selectors
+
+Multi-Threading and Concurrency
+---------------------------------------------------------------------
+
+  A process is an active program and a program is a passive process. Each process has
+  a heap, a stack, a programCounter and a few registries.
+  
+  A Thread is a light-weight process with a shared heap.
+
+  Multi-Thread is to have multiple threds having common heap facilitating, inter thread communication.
+
+  For example, a Thread A can randomly generate integers into an array and another Thread B can
+  read from that array. The array (created in the heap) is shared between the threads.
+
+  Java is my default mutli-threaded. Each and every java program is spanned inside a thread.
+
+  java.lang.Runnable                      void run()
+              |
+              |- java.lang.Thread
+                                          Thread()
+                                          Thread(Runnable job)
+                                          Thread(String name)
+                                          Thread(Runnable job,String nmae)
+
+                                          String getName();
+                                          void setName(String);
+                                          int getPriority();
+                                          void setPriority(int);
+                                          void start();
+                                          void join();
+                                          static void sleep(long ms);
+                                          static Thread currentThrread();
+
+      new Thread(....)
+            ↓
+          .start()  
+            ↓
+          [ READY STAGE .. ] ----- the CPU and other resources when available --------|
+                ↑                                                                     |
+                |                                                                     |  
+                |                                                                     ↓
+            [ PAUSED STAGE ]---------- .sleep(ms)-------------------------- [RUNNING STAGE ... .run() ]  
+                                                                                      |
+                                                                                      | once run method is done
+                                                                                      ↓
+                                                                               [ TERMINATION ]
+
+    resource is any object that is being accessed in the 'run()' method.
     
+    Synchronization is also called monitor and lock. It basically is to allow only one thread
+    to access a piece of code while other threads are made to wait if wanting to do the same.
+
+      synchronized block
+
+        synchronized(obj) {
+          //as and when this block starts execution
+          //the obj-in-the-block is locked, meaning no thread can call
+          //any method on that object until this block completes.
+        }
+
+      synchronized methods
+
+        public synchronized returnType methodName(paramList) {
+          //as and when this methods starts executing
+          //no other synchronized method of 'this' object can be invoked
+          //from any where of the application until the completion of this method
+        }
+
+      synchronized static methods
+
+        public static synchronized returnType methodName(paramList) {
+          //as and when this methods starts executing
+          //the .class object of the current class is locked
+          //meaning no other static method of this class can be invoked and
+          //we can not create an object of this class until the current method completes.
+        }
+
+  Concurrency
+  -----------------------------------------------------
+
+    Concurrency is an extension to multi-threading.
+
+    Multi-Threading is a way to achive asynchronous programming.
+
+    Concurrecny api offered in Java is a machanisim to provide auto managed threads via ThreadPools.
+
+    Concureency api defines three important components for asynchronosu programming,
+
+      Tasks       the job to be done and is represented by 
+                  Runnable      void run()    doesn't return any value and can not throw checked exceptions
+                  Callable      T call()      can return a value and can throw an Excpetion
+
+      Workers     is the one who does the job, that's the Thread .
+
+      Excutors    are the ones who manage the taska dn threads in a thread pool.
+                  Executor (i)
+                    |- ExecutorService (i)
+                    |- ScheduledExecutorService (i)
+
+    ExecutorService
+
+        1. To create an object of ExecutorService, 
+              we have a very long list of implementation classes.
+              We also have Executors (a utility class) with static mehtods to create an obj of ExecutorService.
+
+              ExecutorService exeService = Executors.newSingleThreadExecutor();
+
+        2. To assign jobs to the ExecutorService
+
+            exeService.execute(aTask);                does not return anything irrespective of the job being Runnable or Callable
+            exeService.submit(aTask);                 returns a obj of Future, through which we can check the task status and get result
+            exeService.invokeAny(aCollectionOfTasks); returns a obj of Future related to the first completing Task
+            exeService.invokeAll(aCollectionOfTasks); returns a list of objs of Futures realated to all Tasks.
+
+        3. Shutdown the ExecutorService
+
+            if we do not shutdown an ExecutorService, it willbe active even after
+            completing all the assigned tasks, watiing for new tasks to be assgined.
+
+            exeService.shutdown();      will stop accepts new tasks, waits all assigned tasks are complete and then shuts down
+            exeService.shutdownNow();   tries to shut down immidiately, but does not guarentee that all
+                                        the currently running threads are stopped. it will not
+                                        accept new taksa and will not start executing tasks that are in queue. 
+                                        And returns a List<Runnable> of notExecutedTasks
+
+    Future
+
+      is an interface that represents the result of a task.  
+
+        Future future = exeService.submit(aTask);
+
+        var result = future.get();                        will block the main Thread until the underlying task is complete
+        var result = future.get(timeAmount,timeUnit);     will block the main Thread until the underlying task is complete 
+                                                          or until the timeOut, whichever is earlier.
+
+        future.isDone();
+        future.cancel();
+        future.isCanceled();
+    
+    ScheduledExecutorService 
+
+      ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+
+      Future future  = executorService.schedule(task, timeAmount, timeUnit);   
+          The given task is executed after the givne timeout.
+      
+      executorService.scheduleAtFixedRate(task, initialDelay, periodicDelay,timeUnit);   
+          The given task is executed after the initialDelay of time and after that the task is repeatedly
+          executed for every periodicDelay of time.
+      
+
+
+    
+
+
+

@@ -62,6 +62,43 @@
     sort the collection on dateOfJoing.
     sort the collection on skills.
 
+#6
+------------------------------------------
+
+    Develop a CRUD application as structured below on Txn model.
+
+        com.cts.budgettracker
+                |-BudgetTrackerApplication 
+        
+        com.cts..budgettracker.ui
+                                |- TxnUI
+                                        (a) accept a command like ADD/REMOVE/LIST/QUIT
+                                        (b) and should act according
+
+        com.cts..budgettracker.service
+                                |- TxnService
+                                |- TxnServiceImpl
+        
+        com.cts..budgettracker.dao
+                                |- TxnDAO
+                                |- TxnDAOImpl
+                                    must use java.nio classes to 
+                                    save and retrive list of transactions from a csv file
+
+        com.cts..budgettracker.exceptions
+                                |- BudgetTrackerException
+
+        com.cts..budgettracker.model
+                                |- TxnType  { CREDIT,DEBIT }
+                                |- Txn
+                                        txnId : int
+                                        description: String
+                                        amount: double
+                                        dateOfTxn: LocalDate
+                                        type: TxnType
+        
+            
+
 
 
 

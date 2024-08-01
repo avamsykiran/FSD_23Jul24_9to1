@@ -69,10 +69,12 @@ public class Contact implements Comparable<Contact> {
 		this.dateOfBirth = dateOfBirth;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Contact [contactId=" + contactId + ", fullName=" + fullName + ", mobile=" + mobile + ", mailId="
-				+ mailId + "]";
+				+ mailId + ", dateOfBirth=" + dateOfBirth + "]";
 	}
 
 	@Override
