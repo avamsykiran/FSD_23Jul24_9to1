@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <title>Calculate EMI</title>
+    <script src="../scripts/script04.js"></script>
+</head>
+<body>
+    <form onsubmit="calculateEMI(); return false;" >
+        <div>
+            <label for="loanAmt">Loan Amount: </label>
+            <input type="text" id="loanAmt" name="loanAmt" required>
+        </div>
+        <br>
+        <div>
+            <label for="roi">Rate of intered: </label>
+            <input type="text" id="roi" name="roi" required>
+        </div>
+        <br>
+        <div>
+            <label for="emis">No of EMI's (term): </label>
+            <input type="text" id="emis" name="emis" required>
+        </div>
+        <br>
+        <button type="submit">COMPUTE</button>
+    </form>
+
+    <div>
+        <h3 id="emi"></h3>
+    </div>
+</body>
+</html>
