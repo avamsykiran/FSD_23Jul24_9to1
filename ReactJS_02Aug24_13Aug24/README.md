@@ -275,4 +275,66 @@ ReactJS
 
         import the above two files into index.js
 
-    
+    Application Level State Management Using Redux
+    -------------------------------------------------
+
+        The state of the entire Application is stored and maintained at one location.
+
+        Redux           is one such application level state management tool.
+
+                        npm i redux
+
+                        store           is an immutable object that holds all the state of our APP.
+                                        typically one APP has only one Store
+
+                                        const myStore = createStore(myReducer);
+
+                        reducer         is a pure javascript function that accepts the existing state and an action
+                                        and return the modified state.
+
+                                        const myReducer = (state, action) => {
+
+                                            //write code to modify the state based on the action.
+
+                                            return modifiedState;
+                                        };
+
+                        action          is a javascript object that has an action type and a payload.
+                                        the action type informs the reducer what operation needs to done
+                                        and the payload is the data carried by the action to complete operation
+
+                                        For Example, to add an employee, action type can be 'ADD' and the emp obj is the payload
+                                                    to del an employee, action type can be 'DEL' and the emp id will be the payload.
+
+                        dispatch        is an built-in method created by redux that carries actions from componenets to the reducer.
+
+        React-Redux     is a tool used to integrate redux with react.
+
+                        npm i react-redux
+
+                        Provider        is a component used to wrap the store onto our react top level component.
+
+                                        <Provider store={myStore}>
+                                            <App />
+                                        </Provider>
+
+                        useSelector    is a hook, use to extract a particular  part of the state.
+
+                                        let emps = useState( state => state.emps );
+                                        
+                                        let depts = useState( state => state.depts );
+
+                        useDispatch     is a hook, that returns 'dispatch' method related to our reducer and store.
+
+                                        const dispatch = useDispatch();
+
+
+            store   → ------------------------------|-------------------------------|
+             ↑                                      |                               |
+             |                                      | useSelector                   | useSelector
+             |                                  Component1                      Component2
+             |                                      |                               |
+             | modified state                       | dispatch(action)              |
+             |                                      |                               | dispatch(action)
+             |                                      ↓                               ↓
+             reducer    ←---------------------------←-------------------------------←
