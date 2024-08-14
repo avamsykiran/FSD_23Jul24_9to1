@@ -32,11 +32,11 @@ const contactsReducer = (state = initalState(),action) => {
             break;
 
         case EDIT_CONTACT: 
-            contacts = contacts.map(c => c.id!=action.id?c:{...c,isEditable:true})
+            contacts = contacts.map(c => c.id!==action.id?c:{...c,isEditable:true})
             break;
         
         case UNEDIT_CONTACT: 
-            contacts = contacts.map(c => c.id!=action.id?c:{...c,isEditable:undefined})
+            contacts = contacts.map(c => c.id!==action.id?c:{...c,isEditable:undefined})
             break;
     }
 

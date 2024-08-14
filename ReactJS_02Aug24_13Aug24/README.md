@@ -328,7 +328,6 @@ ReactJS
 
                                         const dispatch = useDispatch();
 
-
             store   → ------------------------------|-------------------------------|
              ↑                                      |                               |
              |                                      | useSelector                   | useSelector
@@ -338,3 +337,56 @@ ReactJS
              |                                      |                               | dispatch(action)
              |                                      ↓                               ↓
              reducer    ←---------------------------←-------------------------------←
+
+    fake rest-api using json-server
+    ---------------------------------------------
+
+        json-server is a javascript tool that generates fake rest-api based on a .json file.
+
+        md adb-api
+        cd adb-api
+        npm init -y
+        npm i json-server@0.17.4
+
+        in 'package.json', we add the 'start':'json-server --port 9999 --watch db.json'
+
+        create adb-api/db.json with the hypothetical data.
+
+    consuming rest-api using axios
+    ----------------------------------------------
+
+        axios
+            .get(url) : Promise
+            .post(url,reqBody) : Promise
+            .put(url,reqBody) : Promise
+            .delete(url) : Promise
+
+    using 'redux-thunk' middleware to integrte asynchronous api calls with reducer
+    --------------------------------------------------------------------------------
+
+        npm i redux-thunk
+
+        let myStore = createStore(myReducer,applyMiddleWare(thunk));
+
+        'thunk' is a middleware that allows a function as an action.
+
+        and these action-functions are executed by the thunk and are used to house the asynchrnous operations.
+
+            store   → ------------------------------|-------------------------------|
+             ↑                                      |                               |
+             |                                      | useSelector                   | useSelector
+             |                                  Component1                      Component2
+             |                                      |                               |
+             | modified state                       | dispatch(actionObj)           |
+             |                                      |                               | dispatch(actionFn)
+             |                                      |                               | 
+             |                                      ↓                               ↓
+             |         |←---------------------------←       |----------------thunk runs actionFn----------------------|
+             reducer  ←|                                    |                                                         |
+                       |←---------------(waitAction)--------| dispatch a wait action obj                              |
+                       |                                    |                                                         |  
+                       |                                    | making a rest-api call                                  |
+                       |←---------------(okAction)----------|   (a) we got a successful resp, dispatch a OK action    |  
+                       |←---------------(errAction)---------|   (b) we got a error resp, dispatch a err action        |
+                                                            |                                                         |  
+                                                            |---------------------------------------------------------|    
