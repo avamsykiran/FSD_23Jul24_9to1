@@ -1,0 +1,95 @@
+<html>
+
+<head>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+	<style>
+		.deadStock {
+			background-color: #ff0000;
+			color: #ffffff;
+		}
+
+		.fastMoving {
+			background-color: #00ff00;
+			color: #ffffff;
+		}
+
+		.moderate {
+			background-color: #0000ff;
+			color: #ffffff;
+		}
+
+		#stockRepTable {
+			width: 450px;
+			margin: auto;
+			border: 1px solid black;
+		}
+	</style>
+	<script>
+		let daySales = [
+			{ icode: 101, stockInHand: 25, stockSold: 12 },
+			{ icode: 102, stockInHand: 25, stockSold: 25 },
+			{ icode: 103, stockInHand: 25, stockSold: 2 },
+			{ icode: 104, stockInHand: 25, stockSold: 10 },
+			{ icode: 105, stockInHand: 25, stockSold: 20 },
+			{ icode: 106, stockInHand: 25, stockSold: 23 }
+		];
+
+		const loadData = () => {
+			let dataArea = $("#stockRepTable>tbody");
+
+			for (let daySale of daySales) {
+				let col1 = $("<td></td>");
+				let col2 = $("<td></td>");
+				let col3 = $("<td></td>");
+				let col4 = $("<td></td>");
+				let row = $("<tr></tr>");
+
+				let stockBal = daySale.stockInHand - daySale.stockSold;
+
+				col1.text(daySale.icode);
+				col2.text(daySale.stockInHand);
+				col3.text(daySale.stockSold);
+				col4.text(stockBal);
+				col1.appendTo(row);
+				col2.appendTo(row);
+				col3.appendTo(row);
+				col4.appendTo(row);
+
+				if (stockBal >= ((2.0 / 3.0) * daySale.stockInHand))
+					row.addClass('deadStock');
+				else if (stockBal >= ((1.0 / 3.0) * daySale.stockInHand))
+					row.addClass('moderate');
+				else
+					row.addClass('fastMoving');
+
+				row.appendTo(dataArea);
+			}
+		}
+
+		$(function () {
+			loadData();
+		});
+	</script>
+</head>
+
+<body>
+	<h2>The Invnetory Report</h2>
+	<table id="stockRepTable">
+		<thead>
+			<tr>
+				<th>Item Code</th>
+				<th>Opening Stock</th>
+				<th>Sold</th>
+				<th>Balance</th>
+			</tr>
+		</thead>
+		<tfoot>
+		</tfoot>
+		<tbody>
+		</tbody>
+	</table>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	
+		<style>
+			.accord{
+				border:1px solid #000000;				
+			}
+
+			.accord>.head{
+				background-color: #000000;
+				color: #ffffff;
+				padding:0.25em;
+				cursor: pointer;
+			}
+		</style>
+		<script>
+			$(() => {
+				$(".accord>.content").hide();
+
+				$(".accord>.head").click(function(){
+					$(this).siblings(".content").slideToggle();
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="accord">
+			<div class="head">A Heading Goes Here</div>
+			<div class="content">
+				<p>Some Content Goes Here...</p>
+				<p>Some Content Goes Here...</p>
+				<p>Some Content Goes Here...</p>
+			</div>
+		</div>
+		<div class="accord">
+			<div class="head">A Heading Goes Here</div>
+			<div class="content">
+				<p>Some Content Goes Here...</p>
+				<p>Some Content Goes Here...</p>
+				<p>Some Content Goes Here...</p>
+			</div>
+		</div>
+		<div class="accord">
+			<div class="head">A Heading Goes Here</div>
+			<div class="content">
+				<p>Some Content Goes Here...</p>
+				<p>Some Content Goes Here...</p>
+				<p>Some Content Goes Here...</p>
+			</div>
+		</div>
+	</body>		
+</html>

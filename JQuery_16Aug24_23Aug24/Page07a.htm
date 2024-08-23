@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	
+		<script>
+			$(document).ready(function(){
+				$("#txtNum").change(function(){
+					$("#result").text(Math.sqrt($("#txtNum").val()));
+				});
+			});
+		</script>
+	</head>
+	<body>
+			<h3>Some Math Example</h3>
+			<form>
+				<label>Enter a number: </label>
+				<input type="number" id="txtNum" value="0"/>
+			</form>
+			<p>Squere Root: <span id="result"></span></p>
+	</body>		
+</html>

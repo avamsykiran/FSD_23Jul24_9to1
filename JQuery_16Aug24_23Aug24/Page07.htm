@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	
+		<script>
+			$(() => {
+
+				$('#txtMessage').val($('#para1').text());
+				$('input[type="text"]').css('border','1px solid black');
+						
+				$('input[type="text"]').focus(() => {
+					$(this).css('border','3px solid black');
+				});
+				
+				$('input[type="text"]').blur(() => {
+					$(this).css('border','1px solid black');
+				});
+				
+				$('#txtMessage').change(() => {
+					$('#para1').text($('#txtMessage').val());
+				});
+				
+				$('#txtFont').change(() => {
+					$('#para1').css('font',$('#txtFont').val());
+				});
+				
+				$('#cmbAlign').change(() => {
+					$('#para1').css('text-align',$('#cmbAlign').val());
+				});
+				
+				$('#form1').submit(() => {
+					alert('Only a test submition, some valdiation code can go here!');
+					return false;
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<h2>Form Events Demo</h2>
+		<p id="para1" style="padding:20px;border: 1px dashed black;">
+			Some text goes here.
+		</p>
+		<form id="form1">
+			<label for="txtMessage">Message: </label>
+			<input type="text" id="txtMessage" size="50" /> <br />
+			<label for="txtFont">Font (style size family): </label>
+			<input type="text" id="txtFont" size="50" /><br />
+			<label for="cmbAlign">Text Allignment </label>
+			<select id="cmbAlign">
+				<option value="left">Left</option>
+				<option value="center">Center</option>
+				<option value="right">right</option>				
+			</select> <br />
+			<button type="submit">Submit</button>
+		</form>
+		
+	</body>		
+</html>
